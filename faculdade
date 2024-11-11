@@ -12,7 +12,7 @@ CREATE TABLE Aluno (
     ID INT PRIMARY KEY AUTO_INCREMENT,
     Nome VARCHAR(100) NOT NULL,
     CPF VARCHAR(11) NOT NULL UNIQUE,
-    DataNascimento DATE,
+    Data_Nascimento DATE,
     Endereco VARCHAR(150)
 );
 
@@ -26,26 +26,26 @@ CREATE TABLE Professor (
 CREATE TABLE Materia (
     ID INT PRIMARY KEY AUTO_INCREMENT,
     Nome VARCHAR(100) NOT NULL,
-    CargaHoraria INT,
-    CursoID INT,
-    FOREIGN KEY (CursoID) REFERENCES Curso(ID)https://github.com/gabsfeitosa26/faculdade.sql/tree/main
+    Carga_Horaria INT,
+    Curso INT,
+    FOREIGN KEY (Curso) REFERENCES Curso(ID)
 );
 
 CREATE TABLE Turma (
     ID INT PRIMARY KEY AUTO_INCREMENT,
-    CursoID INT,
-    MateriaID INT,
-    ProfessorID INT,
-    FOREIGN KEY (CursoID) REFERENCES Curso(ID),
-    FOREIGN KEY (MateriaID) REFERENCES Materia(ID),
-    FOREIGN KEY (ProfessorID) REFERENCES Professor(ID)
+    Curso INT,
+    Materia INT,
+    Professor INT,
+    FOREIGN KEY (Curso) REFERENCES Curso(ID),
+    FOREIGN KEY (Materia) REFERENCES Materia(ID),
+    FOREIGN KEY (Professor) REFERENCES Professor(ID)
 );
 
 CREATE TABLE Nota (
-    AlunoID INT,
-    MateriaID INT,
+    Aluno INT,
+    Materia INT,
     Nota DECIMAL(5,2),
-    PRIMARY KEY (AlunoID, MateriaID),
-    FOREIGN KEY (AlunoID) REFERENCES Aluno(ID),
-    FOREIGN KEY (MateriaID) REFERENCES Materia(ID)
+    PRIMARY KEY (Aluno, Materia),
+    FOREIGN KEY (Aluno) REFERENCES Aluno(ID),
+    FOREIGN KEY (Materia) REFERENCES Materia(ID)
 );
